@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JobFinderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cong_ty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ten_cong_ty" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dia_chi" Type="nvarchar(max)" />
+          <Property Name="gioi_thieu_cong_ty" Type="nvarchar(max)" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="sdt" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="mat_khau" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="trang_web" Type="nvarchar(max)" />
+          <Property Name="anh_dai_dien" Type="nvarchar(max)" />
+          <Property Name="anh_bia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="cong_viec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cong_ty" Type="int" Nullable="false" />
+          <Property Name="ten_cong_viec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="muc_luong_min" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="so_luong_tuyen" Type="int" />
+          <Property Name="hinh_thuc_lam_viec" Type="nvarchar(max)" />
+          <Property Name="cap_bac" Type="nvarchar(max)" />
+          <Property Name="yc_gioi_tinh" Type="nvarchar" MaxLength="100" />
+          <Property Name="ngay_het_han" Type="date" />
+          <Property Name="kinh_nghiem" Type="nvarchar(max)" />
+          <Property Name="dia_diem_lam_viec" Type="nvarchar(max)" />
+          <Property Name="mo_ta" Type="nvarchar(max)" />
+          <Property Name="yeu_cau_ung_vien" Type="nvarchar(max)" />
+          <Property Name="quyen_loi" Type="nvarchar(max)" />
+          <Property Name="cach_thuc_ung_tuyen" Type="nvarchar(max)" />
+          <Property Name="vi_tri" Type="nvarchar" MaxLength="50" />
+          <Property Name="muc_luong_max" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="nguoi_tim_viec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ho_ten" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sdt" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="mat_khau" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="dia_chi" Type="nvarchar(max)" />
+          <Property Name="ngay_sinh" Type="date" />
+          <Property Name="gioi_tinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="trinh_do_hoc_van" Type="nvarchar(max)" />
+          <Property Name="kinh_nghiem" Type="nvarchar(max)" />
+          <Property Name="ky_nang" Type="nvarchar(max)" />
+          <Property Name="chung_chi" Type="nvarchar(max)" />
+          <Property Name="khoa_hoc" Type="nvarchar(max)" />
+          <Property Name="du_an" Type="nvarchar(max)" />
+          <Property Name="san_pham" Type="nvarchar(max)" />
+          <Property Name="hoat_dong_tinh_nguyen" Type="nvarchar(max)" />
+          <Property Name="anh_dai_dien" Type="nvarchar(max)" />
+          <Property Name="anh_bia" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ung_tuyen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_nguoi_tim_viec" Type="int" Nullable="false" />
+          <Property Name="id_cong_viec" Type="int" Nullable="false" />
+          <Property Name="ngay_ung_tuyen" Type="date" />
+        </EntityType>
+        <EntityType Name="ung_tuyen_thanh_cong">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ung_tuyen" Type="int" Nullable="false" />
+          <Property Name="da_ung_tuyen" Type="bit" />
+          <Property Name="ngay_ung_tuyen" Type="date" />
+          <Property Name="ngay_phong_van" Type="date" />
+          <Property Name="ket_qua_phong_van" Type="nvarchar(max)" />
+          <Property Name="ngay_lam_viec" Type="date" />
+          <Property Name="muc_luong" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK__cong_viec__id_co__2C3393D0">
+          <End Role="cong_ty" Type="Self.cong_ty" Multiplicity="1" />
+          <End Role="cong_viec" Type="Self.cong_viec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cong_ty">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cong_viec">
+              <PropertyRef Name="id_cong_ty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ung_tuyen__id_co__300424B4">
+          <End Role="cong_viec" Type="Self.cong_viec" Multiplicity="1" />
+          <End Role="ung_tuyen" Type="Self.ung_tuyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cong_viec">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ung_tuyen">
+              <PropertyRef Name="id_cong_viec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ung_tuyen__id_ng__2F10007B">
+          <End Role="nguoi_tim_viec" Type="Self.nguoi_tim_viec" Multiplicity="1" />
+          <End Role="ung_tuyen" Type="Self.ung_tuyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoi_tim_viec">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ung_tuyen">
+              <PropertyRef Name="id_nguoi_tim_viec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ung_tuyen__id_un__36B12243">
+          <End Role="ung_tuyen" Type="Self.ung_tuyen" Multiplicity="1" />
+          <End Role="ung_tuyen_thanh_cong" Type="Self.ung_tuyen_thanh_cong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ung_tuyen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ung_tuyen_thanh_cong">
+              <PropertyRef Name="id_ung_tuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JobFinderModelStoreContainer">
+          <EntitySet Name="cong_ty" EntityType="Self.cong_ty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cong_viec" EntityType="Self.cong_viec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nguoi_tim_viec" EntityType="Self.nguoi_tim_viec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ung_tuyen" EntityType="Self.ung_tuyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ung_tuyen_thanh_cong" EntityType="Self.ung_tuyen_thanh_cong" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__cong_viec__id_co__2C3393D0" Association="Self.FK__cong_viec__id_co__2C3393D0">
+            <End Role="cong_ty" EntitySet="cong_ty" />
+            <End Role="cong_viec" EntitySet="cong_viec" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ung_tuyen__id_co__300424B4" Association="Self.FK__ung_tuyen__id_co__300424B4">
+            <End Role="cong_viec" EntitySet="cong_viec" />
+            <End Role="ung_tuyen" EntitySet="ung_tuyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ung_tuyen__id_ng__2F10007B" Association="Self.FK__ung_tuyen__id_ng__2F10007B">
+            <End Role="nguoi_tim_viec" EntitySet="nguoi_tim_viec" />
+            <End Role="ung_tuyen" EntitySet="ung_tuyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ung_tuyen__id_un__36B12243" Association="Self.FK__ung_tuyen__id_un__36B12243">
+            <End Role="ung_tuyen" EntitySet="ung_tuyen" />
+            <End Role="ung_tuyen_thanh_cong" EntitySet="ung_tuyen_thanh_cong" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JobFinderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cong_ty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ten_cong_ty" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dia_chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gioi_thieu_cong_ty" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sdt" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mat_khau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="trang_web" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="anh_dai_dien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="anh_bia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="cong_viec" Relationship="Self.FK__cong_viec__id_co__2C3393D0" FromRole="cong_ty" ToRole="cong_viec" />
+        </EntityType>
+        <EntityType Name="cong_viec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cong_ty" Type="Int32" Nullable="false" />
+          <Property Name="ten_cong_viec" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="muc_luong_min" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="so_luong_tuyen" Type="Int32" />
+          <Property Name="hinh_thuc_lam_viec" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cap_bac" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="yc_gioi_tinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ngay_het_han" Type="DateTime" Precision="0" />
+          <Property Name="kinh_nghiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dia_diem_lam_viec" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mo_ta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="yeu_cau_ung_vien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="quyen_loi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cach_thuc_ung_tuyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vi_tri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="muc_luong_max" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="cong_ty" Relationship="Self.FK__cong_viec__id_co__2C3393D0" FromRole="cong_viec" ToRole="cong_ty" />
+          <NavigationProperty Name="ung_tuyen" Relationship="Self.FK__ung_tuyen__id_co__300424B4" FromRole="cong_viec" ToRole="ung_tuyen" />
+        </EntityType>
+        <EntityType Name="nguoi_tim_viec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ho_ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sdt" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mat_khau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dia_chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ngay_sinh" Type="DateTime" Precision="0" />
+          <Property Name="gioi_tinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="trinh_do_hoc_van" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="kinh_nghiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ky_nang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="chung_chi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="khoa_hoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="du_an" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="san_pham" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hoat_dong_tinh_nguyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="anh_dai_dien" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="anh_bia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ung_tuyen" Relationship="Self.FK__ung_tuyen__id_ng__2F10007B" FromRole="nguoi_tim_viec" ToRole="ung_tuyen" />
+        </EntityType>
+        <EntityType Name="ung_tuyen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_nguoi_tim_viec" Type="Int32" Nullable="false" />
+          <Property Name="id_cong_viec" Type="Int32" Nullable="false" />
+          <Property Name="ngay_ung_tuyen" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="cong_viec" Relationship="Self.FK__ung_tuyen__id_co__300424B4" FromRole="ung_tuyen" ToRole="cong_viec" />
+          <NavigationProperty Name="nguoi_tim_viec" Relationship="Self.FK__ung_tuyen__id_ng__2F10007B" FromRole="ung_tuyen" ToRole="nguoi_tim_viec" />
+          <NavigationProperty Name="ung_tuyen_thanh_cong" Relationship="Self.FK__ung_tuyen__id_un__36B12243" FromRole="ung_tuyen" ToRole="ung_tuyen_thanh_cong" />
+        </EntityType>
+        <EntityType Name="ung_tuyen_thanh_cong">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ung_tuyen" Type="Int32" Nullable="false" />
+          <Property Name="da_ung_tuyen" Type="Boolean" />
+          <Property Name="ngay_ung_tuyen" Type="DateTime" Precision="0" />
+          <Property Name="ngay_phong_van" Type="DateTime" Precision="0" />
+          <Property Name="ket_qua_phong_van" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ngay_lam_viec" Type="DateTime" Precision="0" />
+          <Property Name="muc_luong" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ung_tuyen" Relationship="Self.FK__ung_tuyen__id_un__36B12243" FromRole="ung_tuyen_thanh_cong" ToRole="ung_tuyen" />
+        </EntityType>
+        <Association Name="FK__cong_viec__id_co__2C3393D0">
+          <End Role="cong_ty" Type="Self.cong_ty" Multiplicity="1" />
+          <End Role="cong_viec" Type="Self.cong_viec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cong_ty">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cong_viec">
+              <PropertyRef Name="id_cong_ty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ung_tuyen__id_co__300424B4">
+          <End Role="cong_viec" Type="Self.cong_viec" Multiplicity="1" />
+          <End Role="ung_tuyen" Type="Self.ung_tuyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cong_viec">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ung_tuyen">
+              <PropertyRef Name="id_cong_viec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ung_tuyen__id_ng__2F10007B">
+          <End Role="nguoi_tim_viec" Type="Self.nguoi_tim_viec" Multiplicity="1" />
+          <End Role="ung_tuyen" Type="Self.ung_tuyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nguoi_tim_viec">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ung_tuyen">
+              <PropertyRef Name="id_nguoi_tim_viec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ung_tuyen__id_un__36B12243">
+          <End Role="ung_tuyen" Type="Self.ung_tuyen" Multiplicity="1" />
+          <End Role="ung_tuyen_thanh_cong" Type="Self.ung_tuyen_thanh_cong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ung_tuyen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ung_tuyen_thanh_cong">
+              <PropertyRef Name="id_ung_tuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JobFinderEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cong_ty" EntityType="Self.cong_ty" />
+          <EntitySet Name="cong_viec" EntityType="Self.cong_viec" />
+          <EntitySet Name="nguoi_tim_viec" EntityType="Self.nguoi_tim_viec" />
+          <EntitySet Name="ung_tuyen" EntityType="Self.ung_tuyen" />
+          <EntitySet Name="ung_tuyen_thanh_cong" EntityType="Self.ung_tuyen_thanh_cong" />
+          <AssociationSet Name="FK__cong_viec__id_co__2C3393D0" Association="Self.FK__cong_viec__id_co__2C3393D0">
+            <End Role="cong_ty" EntitySet="cong_ty" />
+            <End Role="cong_viec" EntitySet="cong_viec" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ung_tuyen__id_co__300424B4" Association="Self.FK__ung_tuyen__id_co__300424B4">
+            <End Role="cong_viec" EntitySet="cong_viec" />
+            <End Role="ung_tuyen" EntitySet="ung_tuyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ung_tuyen__id_ng__2F10007B" Association="Self.FK__ung_tuyen__id_ng__2F10007B">
+            <End Role="nguoi_tim_viec" EntitySet="nguoi_tim_viec" />
+            <End Role="ung_tuyen" EntitySet="ung_tuyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ung_tuyen__id_un__36B12243" Association="Self.FK__ung_tuyen__id_un__36B12243">
+            <End Role="ung_tuyen" EntitySet="ung_tuyen" />
+            <End Role="ung_tuyen_thanh_cong" EntitySet="ung_tuyen_thanh_cong" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JobFinderModelStoreContainer" CdmEntityContainer="JobFinderEntities">
+          <EntitySetMapping Name="cong_ty">
+            <EntityTypeMapping TypeName="JobFinderModel.cong_ty">
+              <MappingFragment StoreEntitySet="cong_ty">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ten_cong_ty" ColumnName="ten_cong_ty" />
+                <ScalarProperty Name="dia_chi" ColumnName="dia_chi" />
+                <ScalarProperty Name="gioi_thieu_cong_ty" ColumnName="gioi_thieu_cong_ty" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+                <ScalarProperty Name="mat_khau" ColumnName="mat_khau" />
+                <ScalarProperty Name="trang_web" ColumnName="trang_web" />
+                <ScalarProperty Name="anh_dai_dien" ColumnName="anh_dai_dien" />
+                <ScalarProperty Name="anh_bia" ColumnName="anh_bia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cong_viec">
+            <EntityTypeMapping TypeName="JobFinderModel.cong_viec">
+              <MappingFragment StoreEntitySet="cong_viec">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_cong_ty" ColumnName="id_cong_ty" />
+                <ScalarProperty Name="ten_cong_viec" ColumnName="ten_cong_viec" />
+                <ScalarProperty Name="muc_luong_min" ColumnName="muc_luong_min" />
+                <ScalarProperty Name="so_luong_tuyen" ColumnName="so_luong_tuyen" />
+                <ScalarProperty Name="hinh_thuc_lam_viec" ColumnName="hinh_thuc_lam_viec" />
+                <ScalarProperty Name="cap_bac" ColumnName="cap_bac" />
+                <ScalarProperty Name="yc_gioi_tinh" ColumnName="yc_gioi_tinh" />
+                <ScalarProperty Name="ngay_het_han" ColumnName="ngay_het_han" />
+                <ScalarProperty Name="kinh_nghiem" ColumnName="kinh_nghiem" />
+                <ScalarProperty Name="dia_diem_lam_viec" ColumnName="dia_diem_lam_viec" />
+                <ScalarProperty Name="mo_ta" ColumnName="mo_ta" />
+                <ScalarProperty Name="yeu_cau_ung_vien" ColumnName="yeu_cau_ung_vien" />
+                <ScalarProperty Name="quyen_loi" ColumnName="quyen_loi" />
+                <ScalarProperty Name="cach_thuc_ung_tuyen" ColumnName="cach_thuc_ung_tuyen" />
+                <ScalarProperty Name="vi_tri" ColumnName="vi_tri" />
+                <ScalarProperty Name="muc_luong_max" ColumnName="muc_luong_max" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nguoi_tim_viec">
+            <EntityTypeMapping TypeName="JobFinderModel.nguoi_tim_viec">
+              <MappingFragment StoreEntitySet="nguoi_tim_viec">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ho_ten" ColumnName="ho_ten" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+                <ScalarProperty Name="mat_khau" ColumnName="mat_khau" />
+                <ScalarProperty Name="dia_chi" ColumnName="dia_chi" />
+                <ScalarProperty Name="ngay_sinh" ColumnName="ngay_sinh" />
+                <ScalarProperty Name="gioi_tinh" ColumnName="gioi_tinh" />
+                <ScalarProperty Name="trinh_do_hoc_van" ColumnName="trinh_do_hoc_van" />
+                <ScalarProperty Name="kinh_nghiem" ColumnName="kinh_nghiem" />
+                <ScalarProperty Name="ky_nang" ColumnName="ky_nang" />
+                <ScalarProperty Name="chung_chi" ColumnName="chung_chi" />
+                <ScalarProperty Name="khoa_hoc" ColumnName="khoa_hoc" />
+                <ScalarProperty Name="du_an" ColumnName="du_an" />
+                <ScalarProperty Name="san_pham" ColumnName="san_pham" />
+                <ScalarProperty Name="hoat_dong_tinh_nguyen" ColumnName="hoat_dong_tinh_nguyen" />
+                <ScalarProperty Name="anh_dai_dien" ColumnName="anh_dai_dien" />
+                <ScalarProperty Name="anh_bia" ColumnName="anh_bia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ung_tuyen">
+            <EntityTypeMapping TypeName="JobFinderModel.ung_tuyen">
+              <MappingFragment StoreEntitySet="ung_tuyen">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_nguoi_tim_viec" ColumnName="id_nguoi_tim_viec" />
+                <ScalarProperty Name="id_cong_viec" ColumnName="id_cong_viec" />
+                <ScalarProperty Name="ngay_ung_tuyen" ColumnName="ngay_ung_tuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ung_tuyen_thanh_cong">
+            <EntityTypeMapping TypeName="JobFinderModel.ung_tuyen_thanh_cong">
+              <MappingFragment StoreEntitySet="ung_tuyen_thanh_cong">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_ung_tuyen" ColumnName="id_ung_tuyen" />
+                <ScalarProperty Name="da_ung_tuyen" ColumnName="da_ung_tuyen" />
+                <ScalarProperty Name="ngay_ung_tuyen" ColumnName="ngay_ung_tuyen" />
+                <ScalarProperty Name="ngay_phong_van" ColumnName="ngay_phong_van" />
+                <ScalarProperty Name="ket_qua_phong_van" ColumnName="ket_qua_phong_van" />
+                <ScalarProperty Name="ngay_lam_viec" ColumnName="ngay_lam_viec" />
+                <ScalarProperty Name="muc_luong" ColumnName="muc_luong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
