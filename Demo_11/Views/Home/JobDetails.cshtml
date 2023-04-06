@@ -1,0 +1,15 @@
+﻿@model Data.cong_viec
+
+@{
+    ViewBag.Title = "JobDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="itemJob">
+    @Html.DisplayFor(modelItem => modelItem.cong_ty.anh_dai_dien)
+    <img  src="~/wwwroot/image/avatarCompany/@Model.cong_ty.anh_dai_dien"/>
+    <img src="~/wwwroot/image/avatarCompany/@Model.cong_ty.anh_dai_dien"/>
+    @Html.DisplayFor(modelItem => modelItem.ten_cong_viec)
+    @Html.DisplayFor(modelItem => modelItem.cong_ty.ten_cong_ty)
+    @Html.DisplayFor(modelItem => modelItem.muc_luong_min)
+    @Html.DisplayFor(modelItem => modelItem.dia_diem_lam_viec)
+</div>
